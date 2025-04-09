@@ -9,13 +9,19 @@ function Quadrado({q, handleClick}) {
 }
 
 function Tabuleiro() {
-    //const [vezDoX, setVezDoX] = useState(true);
+    const [vezDoX, setVezDoX] = useState(true);
     const [quadrados, setQuadrados] = useState(Array(9).fill(null))
     function handleClick(i) {
-        console.log('Clicou no quadrado '+i+' valor: '+quadrados[i]);
-        const novosQuadrados = quadrados.slice();
-        novosQuadrados[i] = 'X';
-        setQuadrados(novosQuadrados);
+        if (quadrados[i] == null) {
+            const novosQuadrados = quadrados.slice();
+            if (vezDoX) {
+                novosQuadrados[i] = 'X';
+            } else {
+                novosQuadrados[i] = 'O';
+            }
+            setVezDoX(!vezDoX)
+            setQuadrados(novosQuadrados);
+        }
     }
     return (
         <div>
@@ -25,14 +31,14 @@ function Tabuleiro() {
                 <Quadrado q={quadrados[2]} handleClick={() => handleClick(2)} />
             </div>
             <div className="linha">
-                <Quadrado />
-                <Quadrado />
-                <Quadrado />
+                <Quadrado q={quadrados[3]} handleClick={() => handleClick(3)} />
+                <Quadrado q={quadrados[4]} handleClick={() => handleClick(4)} />
+                <Quadrado q={quadrados[5]} handleClick={() => handleClick(5)} />
             </div>
             <div className="linha">
-                <Quadrado />
-                <Quadrado />
-                <Quadrado />
+                <Quadrado q={quadrados[6]} handleClick={() => handleClick(6)} />
+                <Quadrado q={quadrados[7]} handleClick={() => handleClick(7)} />
+                <Quadrado q={quadrados[8]} handleClick={() => handleClick(8)} />
             </div>
         </div>
     )
