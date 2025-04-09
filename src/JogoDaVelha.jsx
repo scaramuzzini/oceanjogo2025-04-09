@@ -9,12 +9,35 @@ function Quadrado({q, handleClick}) {
 }
 
 function verificarVencedor(quadrados) {
-    // && AND E
-    if (quadrados[0] == quadrados[1] 
-        && quadrados[1] == quadrados[[2]]) {
-            //temos um vencedor
-            return quadrados[0];
+
+    const combinacoesVencedoras = [
+        // linhas
+        [0, 1, 2], 
+        [3, 4, 5],
+        [6, 7, 8],
+
+        //colunas
+        [0, 3, 6],
+        [1, 4, 7],
+        [2, 5, 8],
+
+        // dp e ds
+        [0, 4, 8],
+        [2, 4, 6]
+    ];
+
+    for (let i=0; i < combinacoesVencedoras.length; i++) {
+        console.log('Verificando...' + combinacoesVencedoras[i]);
+        const [p1, p2, p3] = combinacoesVencedoras[i];
+        if (quadrados[p1]
+            && quadrados[p1] == quadrados[p2] 
+            && quadrados[p2] == quadrados[p3]) {
+                console.log('temos um vencedor!!! ' + quadrados[p1])
+                //temos um vencedor
+                return quadrados[p1];
+        }
     }
+
     return null;      
 }
 
