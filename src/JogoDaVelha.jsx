@@ -1,18 +1,7 @@
 import './jogo.css'
 import { useState } from 'react';
 
-function Quadrado() {
-
-    const [q,setQ] = useState('')
-
-    function handleClick() {
-        if (q == 'X') {
-            setQ('O')
-        } else {
-            setQ('X')
-        }
-    }
-
+function Quadrado({q, handleClick}) {
     return <button className='q'
         onClick={handleClick}>
             {q}
@@ -20,12 +9,20 @@ function Quadrado() {
 }
 
 function Tabuleiro() {
+    //const [vezDoX, setVezDoX] = useState(true);
+    const [quadrados, setQuadrados] = useState(Array(9).fill(null))
+    function handleClick(i) {
+        console.log('Clicou no quadrado '+i+' valor: '+quadrados[i]);
+        const novosQuadrados = quadrados.slice();
+        novosQuadrados[i] = 'X';
+        setQuadrados(novosQuadrados);
+    }
     return (
         <div>
             <div className="linha">
-                <Quadrado />
-                <Quadrado />
-                <Quadrado />
+                <Quadrado q={quadrados[0]} handleClick={() => handleClick(0)} />
+                <Quadrado q={quadrados[1]} handleClick={() => handleClick(1)} />
+                <Quadrado q={quadrados[2]} handleClick={() => handleClick(2)} />
             </div>
             <div className="linha">
                 <Quadrado />
